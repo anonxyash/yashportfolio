@@ -67,7 +67,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 <SmartLink
                   suffixIcon="arrowRight"
                   style={{ margin: "0", width: "fit-content" }}
-                  href={href}
+                  href={title === "Development of a flexible and highly customizable design system using Next.js for front-end and Figma for design collaboration." ? "/blog" : (title.includes("Automating Design Handovers") ? "/work/automate-design-handovers-with-a-figma-to-code-pipeline" : "https://relevant-try-712569.framer.app")}
                 >
                   <Text variant="body-default-s">Read case study</Text>
                 </SmartLink>

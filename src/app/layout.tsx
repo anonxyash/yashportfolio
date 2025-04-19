@@ -68,7 +68,8 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <Flex
       as="html"
@@ -154,7 +155,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               <RouteGuard>{children}</RouteGuard>
             </Flex>
           </Flex>
-          <Footer />
+
         </Column>
       </ToastProvider>
     </Flex>

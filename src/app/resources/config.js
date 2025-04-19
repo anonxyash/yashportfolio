@@ -2,6 +2,7 @@ const baseURL = "demo.magic-portfolio.com";
 
 const routes = {
   "/": true,
+  "/services": true,
   "/about": true,
   "/work": true,
   "/blog": true,
@@ -17,8 +18,8 @@ const protectedRoutes = {
 const style = {
   theme: "dark", // dark | light
   neutral: "gray", // sand | gray | slate
-  brand: "emerald", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
-  accent: "orange", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+  brand: "pink", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+  accent: "pink", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
   solid: "contrast", // color | contrast
   solidStyle: "flat", // flat | plastic
   border: "playful", // rounded | playful | conservative
@@ -39,10 +40,10 @@ const effects = {
     y: 0,
     width: 100,
     height: 100,
-    tilt: 0,
+    tilt: -45,
     colorStart: "brand-background-strong",
-    colorEnd: "static-transparent",
-    opacity: 50,
+    colorEnd: "static-white",
+    opacity: 90,
   },
   dots: {
     display: true,
@@ -83,8 +84,8 @@ const mailchimp = {
       width: 100,
       height: 100,
       tilt: -45,
-      colorStart: "accent-background-strong",
-      colorEnd: "static-transparent",
+      colorStart: "brand-background-strong",
+      colorEnd: "static-white",
       opacity: 100,
     },
     dots: {
@@ -100,8 +101,8 @@ const mailchimp = {
     },
     grid: {
       display: true,
-      color: "neutral-alpha-weak",
-      opacity: 100,
+      color: "brand-alpha-weak",
+      opacity: 70,
     },
   },
 };

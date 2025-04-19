@@ -20,18 +20,18 @@ export function Projects({ range }: ProjectsProps) {
   return (
     <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
       {displayedProjects.map((post, index) => (
-        <ProjectCard
-          priority={index < 2}
-          key={post.slug}
-          href={`work/${post.slug}`}
-          images={post.metadata.images}
-          title={post.metadata.title}
-          description={post.metadata.summary}
-          content={post.content}
-          avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
-          link={post.metadata.link || ""}
-        />
-      ))}
+  <ProjectCard
+    priority={index < 2}
+    key={post.slug}
+    href="https://relevant-try-712569.framer.app"
+    images={post.metadata.images}
+    title={post.metadata.title}
+    description={post.metadata.summary}
+    content={post.content}
+    avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
+    link="https://relevant-try-712569.framer.app"
+  />
+))}
     </Column>
   );
 }

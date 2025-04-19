@@ -79,7 +79,12 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
         position="relative"
         as="div"
         ref={ref}
-        className={classNames(colorClass, styles.icon, styles[size])}
+        className={classNames(
+          colorClass, 
+          styles.icon, 
+          styles[size], 
+          name === "whatsapp" && styles.whatsapp
+        )}
         role={decorative ? "presentation" : undefined}
         aria-hidden={decorative ? "true" : undefined}
         aria-label={decorative ? undefined : name}
