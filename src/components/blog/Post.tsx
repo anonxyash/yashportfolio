@@ -38,7 +38,7 @@ export default function Post({ post, thumbnail }: PostProps) {
             cursor="interactive"
             radius="m"
             src={post.metadata.image}
-            alt={"Thumbnail of " + post.metadata.title}
+            alt=""
             aspectRatio="16 / 9"
           />
         )}
@@ -46,16 +46,7 @@ export default function Post({ post, thumbnail }: PostProps) {
           <Heading as="h2" variant="heading-strong-l" wrap="balance">
             {post.metadata.title}
           </Heading>
-          <Text variant="label-default-s" onBackground="neutral-weak">
-            {post.metadata.publishedAt && formatDate(post.metadata.publishedAt, false)}
-          </Text>
-          {tags.length > 0 && (
-            <Flex gap="8">
-              {tags.map((tag: string, index: number) =>
-                index < 3 ? <Tag key={index} label={tag} variant="neutral" /> : null
-              )}
-            </Flex>
-          )}
+
         </Column>
       </Flex>
     </SmartLink>
