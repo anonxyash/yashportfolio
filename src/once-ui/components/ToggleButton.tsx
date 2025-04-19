@@ -25,8 +25,8 @@ interface CommonProps {
   fillWidth?: boolean;
   weight?: "default" | "strong";
   truncate?: boolean;
-  prefixIcon?: string;
-  suffixIcon?: string;
+  prefixIcon?: React.ReactNode;
+  suffixIcon?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
   children?: ReactNode;
@@ -84,7 +84,11 @@ const ToggleButton = forwardRef<HTMLElement, ToggleButtonProps>(
         style={style}
         {...props}
       >
-        {prefixIcon && <Icon name={prefixIcon} size={size === "l" ? "m" : "s"} />}
+        {prefixIcon && (typeof prefixIcon === "string" ? (
+  <Icon name={prefixIcon} size={size === "l" ? "m" : "s"} />
+) : (
+  prefixIcon
+))}
         {(label || children) && (
           <Flex
             padding={size === "s" ? "2" : "4"}
@@ -95,7 +99,11 @@ const ToggleButton = forwardRef<HTMLElement, ToggleButtonProps>(
             {label || children}
           </Flex>
         )}
-        {suffixIcon && <Icon name={suffixIcon} size={size === "l" ? "m" : "s"} />}
+        {suffixIcon && (typeof suffixIcon === "string" ? (
+  <Icon name={suffixIcon} size={size === "l" ? "m" : "s"} />
+) : (
+  suffixIcon
+))}
       </ElementType>
     );
   },

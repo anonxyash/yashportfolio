@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { Gallery, GalleryImage } from "./gallery";
 
 export interface Person {
@@ -55,6 +54,7 @@ export const home = {
   subline: "I'm Yash, an AI Expert & Creative Director, transforming brands through intelligent design and visionary strategy.",
 };
 
+
 export const about = {
   label: "About",
   title: "About me",
@@ -85,7 +85,7 @@ export const about = {
         role: "ceo and co founder",
         achievements: [
           "Redesigned the UI/UX for the axiom agency, resulting in a 20% increase in user engagement and 30% faster load times.",
-          "Spearheaded the integration of AI tools into design workflows, enabling designers to iterate 50% faster.",
+          "Spearheaded the integration of AI tools into design workflows, enabling designers to iterate 50% faster."
         ],
         images: [
           {
@@ -102,7 +102,7 @@ export const about = {
         role: "website designer",
         achievements: [
           "Developed a design system that unified the brand across multiple platforms, improving design consistency by 40%.",
-          "Led a cross-functional team to launch a new product line, contributing to a 15% increase in overall company revenue.",
+          "Led a cross-functional team to launch a new product line, contributing to a 15% increase in overall company revenue."
         ],
         images: [],
       },

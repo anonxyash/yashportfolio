@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Fade, Flex, Line, ToggleButton } from "@/once-ui/components";
 import styles from "@/components/Header.module.scss";
+import { FaCode } from "react-icons/fa";
 
 import { routes, display } from "@/app/resources";
 import { person, home, about, blog, work } from "@/app/resources/content";
@@ -77,7 +78,7 @@ export const Header = () => {
               <Line vert maxHeight="24" />
               {routes["/services"] && (
                 <ToggleButton
-                  prefixIcon="build"
+                  prefixIcon={<FaCode />}
                   href="/services"
                   label="Services"
                   selected={pathname === "/services"}
