@@ -251,7 +251,7 @@ export default function PixelCard({
       const effectiveGap = Math.max(pixelGap, reducedMotion ? 10 : 5);
       const maxPixels = 5000; // Limit total pixels for performance
       
-      const pxs = [];
+      const pxs: Pixel[] = [];
       let pixelCount = 0;
       
       for (let x = 0; x < width && pixelCount < maxPixels; x += effectiveGap) {
