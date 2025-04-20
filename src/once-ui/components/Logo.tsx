@@ -31,7 +31,7 @@ const Logo: React.FC<LogoProps> = ({
   wordmark = true,
   icon = true,
   href,
-  iconSrc,
+  iconSrc = "/images/avatar.jpg",
   wordmarkSrc,
   className,
   style,
