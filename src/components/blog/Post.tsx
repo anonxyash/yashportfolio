@@ -28,20 +28,7 @@ export default function Post({ post, thumbnail }: PostProps) {
         paddingX="16"
         gap="32"
       >
-        {post.metadata.image && thumbnail && (
-          <SmartImage
-            priority
-            maxWidth={20}
-            className={styles.image}
-            sizes="640px"
-            border="neutral-alpha-weak"
-            cursor="interactive"
-            radius="m"
-            src={post.metadata.image}
-            alt=""
-            aspectRatio="16 / 9"
-          />
-        )}
+
         <Column position="relative" fillWidth gap="8" vertical="center">
           <Heading as="h2" variant="heading-strong-l" wrap="balance">
             {post.metadata.title}

@@ -69,6 +69,10 @@ interface RootLayoutProps {
 }
 
 
+
+
+import FadeTransition from "@/components/FadeTransition";
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <Flex
@@ -93,53 +97,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <ToastProvider>
         <Column style={{ minHeight: "100vh" }} as="body" fillWidth margin="0" padding="0">
-          <Background
-            mask={{
-              cursor: effects.mask.cursor,
-              x: effects.mask.x,
-              y: effects.mask.y,
-              radius: effects.mask.radius,
-            }}
-            gradient={{
-              display: effects.gradient.display,
-              x: effects.gradient.x,
-              y: effects.gradient.y,
-              width: effects.gradient.width,
-              height: effects.gradient.height,
-              tilt: effects.gradient.tilt,
-              colorStart: effects.gradient.colorStart,
-              colorEnd: effects.gradient.colorEnd,
-              opacity: effects.gradient.opacity as
-                | 0
-                | 10
-                | 20
-                | 30
-                | 40
-                | 50
-                | 60
-                | 70
-                | 80
-                | 90
-                | 100,
-            }}
-            dots={{
-              display: effects.dots.display,
-              color: effects.dots.color,
-              size: effects.dots.size as any,
-              opacity: effects.dots.opacity as any,
-            }}
-            grid={{
-              display: effects.grid.display,
-              color: effects.grid.color,
-              width: effects.grid.width as any,
-              height: effects.grid.height as any,
-              opacity: effects.grid.opacity as any,
-            }}
-            lines={{
-              display: effects.lines.display,
-              opacity: effects.lines.opacity as any,
-            }}
-          />
           <Flex fillWidth minHeight="16"></Flex>
           <Header />
           <Flex
@@ -151,9 +108,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             horizontal="center"
             flex={1}
           >
-            <Flex horizontal="center" fillWidth minHeight="0">
-              <RouteGuard>{children}</RouteGuard>
-            </Flex>
+            <FadeTransition>
+              <Flex horizontal="center" fillWidth minHeight="0">
+                <RouteGuard>{children}</RouteGuard>
+              </Flex>
+            </FadeTransition>
           </Flex>
 
         </Column>
@@ -161,3 +120,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </Flex>
   );
 }
+
+

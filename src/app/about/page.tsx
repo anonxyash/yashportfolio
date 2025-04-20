@@ -45,6 +45,8 @@ export async function generateMetadata() {
   };
 }
 
+import Spline from '@splinetool/react-spline/next';
+
 export default function About() {
   const structure = [
     {
@@ -69,7 +71,13 @@ export default function About() {
     },
   ];
   return (
-    <Column maxWidth="m">
+    <div style={{ position: 'relative', minHeight: '100vh', width: '100vw', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+      {/* Static Spline background */}
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', userSelect: 'none' }}>
+        <Spline scene="https://prod.spline.design/Yd64S3XYXTtoacxJ/scene.splinecode" />
+      </div>
+      <div style={{ position: 'relative', zIndex: 2, width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Column maxWidth="m">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -342,6 +350,8 @@ export default function About() {
           )}
         </Column>
       </Flex>
-    </Column>
+        </Column>
+      </div>
+    </div>
   );
 }

@@ -33,9 +33,17 @@ export async function generateMetadata() {
   };
 }
 
+import Spline from '@splinetool/react-spline/next';
+
 export default function Blog() {
   return (
-    <Column maxWidth="s">
+    <div style={{ position: 'relative', minHeight: '100vh', width: '100vw', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+      {/* Static Spline background */}
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', userSelect: 'none', backgroundColor: "#000" }}>
+        <Spline scene="https://prod.spline.design/Yd64S3XYXTtoacxJ/scene.splinecode" />
+      </div>
+      <div style={{ position: 'relative', zIndex: 2, width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Column maxWidth="s">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -66,6 +74,8 @@ export default function Blog() {
         <Posts range={[4]} columns="2" />
       </Column>
       {newsletter.display && <Mailchimp newsletter={newsletter} />}
-    </Column>
+        </Column>
+      </div>
+    </div>
   );
-}
+;}

@@ -7,7 +7,7 @@ import { Fade, Flex, Line, ToggleButton } from "@/once-ui/components";
 import styles from "@/components/Header.module.scss";
 import { FaCode } from "react-icons/fa";
 
-import { routes, display } from "@/app/resources";
+import { display } from "@/app/resources";
 import { person, home, about, blog, work } from "@/app/resources/content";
 
 type TimeDisplayProps = {
@@ -72,70 +72,48 @@ export const Header = () => {
             horizontal="center"
           >
             <Flex gap="4" vertical="center" textVariant="body-default-s">
-              {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
-              )}
+              <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
               <Line vert maxHeight="24" />
-              {routes["/services"] && (
-                <ToggleButton
-                  prefixIcon={<FaCode />}
-                  href="/services"
-                  label="Services"
-                  selected={pathname === "/services"}
-                />
-              )}
-              <Line vert maxHeight="24" />
-              {routes["/about"] && (
-                <>
-                  <ToggleButton
-                    className="s-flex-hide"
-                    prefixIcon="person"
-                    href="/about"
-                    label={about.label}
-                    selected={pathname === "/about"}
-                  />
-                  <ToggleButton
-                    className="s-flex-show"
-                    prefixIcon="person"
-                    href="/about"
-                    selected={pathname === "/about"}
-                  />
-                </>
-              )}
-              {routes["/work"] && (
-                <>
-                  <ToggleButton
-                    className="s-flex-hide"
-                    prefixIcon="grid"
-                    href="/work"
-                    label={work.label}
-                    selected={pathname.startsWith("/work")}
-                  />
-                  <ToggleButton
-                    className="s-flex-show"
-                    prefixIcon="grid"
-                    href="/work"
-                    selected={pathname.startsWith("/work")}
-                  />
-                </>
-              )}
-              {routes["/blog"] && (
-                <>
-                  <ToggleButton
-                    className="s-flex-hide"
-                    prefixIcon="book"
-                    href="/blog"
-                    label={blog.label}
-                    selected={pathname.startsWith("/blog")}
-                  />
-                  <ToggleButton
-                    className="s-flex-show"
-                    prefixIcon="book"
-                    href="/blog"
-                    selected={pathname.startsWith("/blog")}
-                  />
-                </>
-              )}
+
+              <ToggleButton
+                className="s-flex-hide"
+                prefixIcon="grid"
+                href="/work"
+                label={work.label}
+                selected={pathname.startsWith("/work")}
+              />
+              <ToggleButton
+                className="s-flex-show"
+                prefixIcon="grid"
+                href="/work"
+                selected={pathname.startsWith("/work")}
+              />
+              <ToggleButton
+                className="s-flex-hide"
+                prefixIcon="person"
+                href="/about"
+                label={about.label}
+                selected={pathname === "/about"}
+              />
+              <ToggleButton
+                className="s-flex-show"
+                prefixIcon="person"
+                href="/about"
+                selected={pathname === "/about"}
+              />
+              <ToggleButton
+                className="s-flex-hide"
+                prefixIcon="book"
+                href="/blog"
+                label={blog.label}
+                selected={pathname.startsWith("/blog")}
+              />
+              <ToggleButton
+                className="s-flex-show"
+                prefixIcon="book"
+                href="/blog"
+                selected={pathname.startsWith("/blog")}
+              />
 
             </Flex>
           </Flex>

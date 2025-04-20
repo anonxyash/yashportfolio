@@ -6,6 +6,13 @@ import Link from "next/link";
 
 export default function GalleryHero() {
   const [splineLoaded, setSplineLoaded] = useState(false);
+  const [showSpline, setShowSpline] = useState(false);
+
+  // Lazy-load Spline after a short delay for perceived speed
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSpline(true), 200);
+    return () => clearTimeout(timer);
+  }, []);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [timerActive, setTimerActive] = useState(false);
   const [timer, setTimer] = useState(0);
@@ -35,13 +42,50 @@ export default function GalleryHero() {
     return () => clearTimeout(countdown);
   }, [timerActive, timer]);
 
+  // Timeout fallback if Spline fails to load
+  const [loadFailed, setLoadFailed] = useState(false);
+  useEffect(() => {
+    if (!splineLoaded) {
+      const timeout = setTimeout(() => setLoadFailed(true), 10000);
+      return () => clearTimeout(timeout);
+    }
+  }, [splineLoaded]);
+
   return (
     <div style={{ position: "fixed", inset: 0, width: "100vw", height: "100vh", minHeight: "100vh", overflow: "hidden", background: "#000", zIndex: 0, pointerEvents: "none" }}>
-      <Spline
-        scene="https://prod.spline.design/NdWo43TzsgvckU7c/scene.splinecode"
-        onLoad={() => setSplineLoaded(true)}
-        style={{ position: "absolute", inset: 0, width: "100vw", height: "100vh", minHeight: "100vh", pointerEvents: "none" }}
-      />
+      {/* Spline background */}
+      <div className="absolute inset-0 z-0" style={{width:'100vw',height:'100vh',minHeight:'100vh',pointerEvents:'none'}}>
+        {/* Fallback image always visible until Spline loads */}
+        <img
+          src="/spline-fallback.jpg"
+          alt="3D preview"
+          style={{position:'absolute',inset:0,width:'100vw',height:'100vh',objectFit:'cover',zIndex:0,background:'#000'}}
+        />
+        {/* Spline overlays fallback only when loaded */}
+        {!loadFailed && (
+          <div style={{display: splineLoaded ? 'block' : 'none'}}>
+            <Spline 
+              scene="https://prod.spline.design/ACBE2TK7gZ16TPDN/scene.splinecode"
+              style={{width:'100vw',height:'100vh',minHeight:'100vh',pointerEvents:'none',position:'absolute',inset:0}}
+              onLoad={() => setSplineLoaded(true)}
+            />
+          </div>
+        )}
+        {/* Loading spinner/message overlays fallback while waiting */}
+        {!splineLoaded && !loadFailed && (
+          <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',zIndex:2}}>
+            <div style={{color:'#fff',fontSize:'1.2rem',background:'rgba(0,0,0,0.7)',padding:'2em 3em',borderRadius:16}}>Loading 3D experience...</div>
+          </div>
+        )}
+        {/* Fallback error overlays fallback image if Spline fails */}
+        {loadFailed && (
+          <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',zIndex:2}}>
+            <div style={{color:'#fff',fontSize:'1.2rem',background:'rgba(0,0,0,0.7)',padding:'2em 3em',borderRadius:16}}>
+              3D experience failed to load.<br />Please check your connection or try again later.
+            </div>
+          </div>
+        )}
+      </div>
       {/* Overlay text and buttons */}
       <div
         style={{

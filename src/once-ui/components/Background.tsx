@@ -86,69 +86,17 @@ const Background = forwardRef<HTMLDivElement, BackgroundProps>(
     const dotsColor = dots.color ?? "brand-on-background-weak";
     const dotsSize = "var(--static-space-" + (dots.size ?? "24") + ")";
 
-    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-    const [smoothPosition, setSmoothPosition] = useState({ x: 0, y: 0 });
     const backgroundRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
       setRef(forwardedRef, backgroundRef.current);
     }, [forwardedRef]);
 
-    useEffect(() => {
-      const handleMouseMove = (event: MouseEvent) => {
-        if (backgroundRef.current) {
-          const rect = backgroundRef.current.getBoundingClientRect();
-          setCursorPosition({
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top,
-          });
-        }
-      };
+    // All mouse/cursor tracking and gradient logic removed
 
-      document.addEventListener("mousemove", handleMouseMove);
-
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-      };
-    }, []);
-
-    useEffect(() => {
-      let animationFrameId: number;
-
-      const updateSmoothPosition = () => {
-        setSmoothPosition((prev) => {
-          const dx = cursorPosition.x - prev.x;
-          const dy = cursorPosition.y - prev.y;
-          const easingFactor = 0.05;
-
-          return {
-            x: Math.round(prev.x + dx * easingFactor),
-            y: Math.round(prev.y + dy * easingFactor),
-          };
-        });
-        animationFrameId = requestAnimationFrame(updateSmoothPosition);
-      };
-
-      if (mask.cursor) {
-        animationFrameId = requestAnimationFrame(updateSmoothPosition);
-      }
-
-      return () => {
-        cancelAnimationFrame(animationFrameId);
-      };
-    }, [cursorPosition, mask]);
-
+    // Only static mask logic remains
     const maskStyle = (): CSSProperties => {
       if (!mask) return {};
-
-      if (mask.cursor) {
-        return {
-          "--mask-position-x": `${smoothPosition.x}px`,
-          "--mask-position-y": `${smoothPosition.y}px`,
-          "--mask-radius": `${mask.radius || 50}vh`,
-        } as CSSProperties;
-      }
-
       if (mask.x != null && mask.y != null) {
         return {
           "--mask-position-x": `${mask.x}%`,
@@ -156,22 +104,9 @@ const Background = forwardRef<HTMLDivElement, BackgroundProps>(
           "--mask-radius": `${mask.radius || 50}vh`,
         } as CSSProperties;
       }
-
       return {};
     };
 
-    const remap = (
-      value: number,
-      inputMin: number,
-      inputMax: number,
-      outputMin: number,
-      outputMax: number,
-    ) => {
-      return ((value - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin;
-    };
-
-    const adjustedX = gradient.x != null ? remap(gradient.x, 0, 100, 37.5, 62.5) : 50;
-    const adjustedY = gradient.y != null ? remap(gradient.y, 0, 100, 37.5, 62.5) : 50;
 
     return (
       <Flex
@@ -189,29 +124,6 @@ const Background = forwardRef<HTMLDivElement, BackgroundProps>(
         }}
         {...rest}
       >
-        {gradient.display && (
-          <Flex
-            position="absolute"
-            className={styles.gradient}
-            opacity={gradient.opacity}
-            pointerEvents="none"
-            style={{
-              ["--gradient-position-x" as string]: `${adjustedX}%`,
-              ["--gradient-position-y" as string]: `${adjustedY}%`,
-              ["--gradient-width" as string]:
-                gradient.width != null ? `${gradient.width / 4}%` : "25%",
-              ["--gradient-height" as string]:
-                gradient.height != null ? `${gradient.height / 4}%` : "25%",
-              ["--gradient-tilt" as string]: gradient.tilt != null ? `${gradient.tilt}deg` : "0deg",
-              ["--gradient-color-start" as string]: gradient.colorStart
-                ? `var(--${gradient.colorStart})`
-                : "var(--brand-solid-strong)",
-              ["--gradient-color-end" as string]: gradient.colorEnd
-                ? `var(--${gradient.colorEnd})`
-                : "var(--brand-solid-weak)",
-            }}
-          />
-        )}
         {dots.display && (
           <Flex
             position="absolute"
